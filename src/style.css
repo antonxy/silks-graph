@@ -1,35 +1,14 @@
-html {
-	width: 100%;
-	height: 100%;
-}
-
-body {
-	font: 14px helvetica neue, helvetica, arial, sans-serif;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-}
-
 #cy {
-	position: absolute;
-	left: 0;
-	top: 0;
-	bottom: 0;
-	right: 30em;
+    width: 100%;
+    min-height: -webkit-fill-available;
+    min-height: 100vh;
+    border: 1px solid black;
 }
 
+/* Make sidebar high enough even if image/video is not loaded yet so that scrolling works */
 #sidebar {
-	position: absolute;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	width: 30em;
-	background: rgba(0, 0, 0, 0.666);
-	box-sizing: border-box;
-	padding: 1em;
-	color: #fff;
-	overflow: auto;
-	z-index: 1;
+    min-height: -webkit-fill-available;
+    min-height: 100vh;
 }
 
 .side-image {

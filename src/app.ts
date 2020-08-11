@@ -1,5 +1,9 @@
 import cytoscape from 'cytoscape';
 
+import coseBilkent from 'cytoscape-cose-bilkent';
+
+cytoscape.use(coseBilkent);
+
 function graph_to_cyto(graph: any) {
   return graph.positions.map((pos: any) => ({
     group: 'nodes',
@@ -34,14 +38,29 @@ var cy = cytoscape({
         'target-arrow-color': '#ccc',
         'target-arrow-shape': 'triangle',
         'curve-style': 'bezier',
-        'label': 'data(name)'
+        'label': 'data(name)',
+        'text-rotation': ('autorotate' as any),
+        "arrow-scale": 2,
+      }
+    },
+
+    {
+      selector: ":selected",
+      style: {
+        "background-color": "green",
+        "line-color": "green",
       }
     }
   ],
 
-  layout: {
-    name: 'breadthfirst',
-  }
+  layout: ({
+    //name: 'breadthfirst',
+    name: 'cose-bilkent',
+    nodeDimensionsIncludeLabels: true,
+    idealEdgeLength: 200,
+  } as any),
+
+  selectionType: 'single',
 
 });
 
@@ -63,6 +82,10 @@ function update_sidebar(title: string, image?: string, video?: string) {
   } else {
     video_elm.src = "";
     video_elm.style.display = "none";
+  }
+
+  if (video || image) {
+    document!.getElementById('sidebar')!.scrollIntoView({ behavior: 'smooth' });
   }
 }
 

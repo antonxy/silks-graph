@@ -4,20 +4,23 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "cytoscape": "^3.15.2"
+    "bootstrap": "^4.5.2",
+    "cytoscape": "^3.15.2",
+    "cytoscape-cose-bilkent": "^4.1.0"
   },
   "devDependencies": {
     "@types/cytoscape": "^3.14.7",
     "live-server": "^1.2.1",
     "rollup": "^2.23.1",
     "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "typescript": "^3.9.7"
   },
   "scripts": {
     "build": "tsc && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "live-server src --watch=src/**/*.html,src/bundle.js,src/**/*.css,src/**/*.json"
+    "serve": "live-server src --port=5000 --watch=src/**/*.html,src/bundle.js,src/**/*.css,src/**/*.json"
   },
   "author": "",
   "license": "MIT"

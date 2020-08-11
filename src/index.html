@@ -6,16 +6,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Silks Graph</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap-grid.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
-	<div id="cy"></div>
-	<div id="sidebar">
-		<h2 id="action-name"></h2>
-		<img id="action-img" class="side-image" src="" />
-		<video id="action-video" class="side-image" src="" />
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-8" id="cy"></div>
+			<div class="col-md-4" id="sidebar">
+				<h2 id="action-name"></h2>
+				<img id="action-img" class="side-image" src="" />
+				<video id="action-video" class="side-image" muted="true" src=""></video>
+			</div>
+		</div>
 	</div>
+
 	<script src="/bundle.js"></script>
 </body>
 

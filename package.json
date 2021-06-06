@@ -20,7 +20,7 @@
   "scripts": {
     "build": "tsc && rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "live-server src --port=5000 --watch=src/**/*.html,src/bundle.js,src/**/*.css,src/**/*.json"
+    "serve": "live-server dist --port=5000 --watch=dist/**/*"
   },
   "author": "",
   "license": "MIT"

@@ -7,14 +7,16 @@ export default {
 	output: {
 		format: "umd",
 		name: "app",
-		file: "src/bundle.js"
+		file: "dist/bundle.js"
 	},
 	plugins: [
 		resolve(),
 		commonjs(),
 		copy({
 			targets: [
-				{ src: 'node_modules/bootstrap/dist/css/bootstrap-grid.css', dest: 'src/' }
+				{ src: 'node_modules/bootstrap/dist/css/bootstrap-grid.css', dest: 'dist/' },
+				{ src: 'src/*.html', dest: 'dist/' },
+				{ src: 'src/*.css', dest: 'dist/' }
 			]
 		})
 	],

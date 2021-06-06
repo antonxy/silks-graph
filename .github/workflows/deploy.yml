@@ -30,6 +30,9 @@ jobs:
           npm run-script build
           
       - name: upload to server
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
         run: |
           eval $(ssh-agent -s)
           echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -

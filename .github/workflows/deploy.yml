@@ -29,8 +29,14 @@ jobs:
           npm install
           npm run-script build
           
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v2.2.3
-        with:
-          name: dist
-          path: dist/
+      - name: upload to server
+        run: |
+          eval $(ssh-agent -s)
+          echo "$DEPLOY_SSH_KEY" | tr -d '\r' | ssh-add -
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+          tar -cf - dist | ssh webspace-user@dogcraft.de -p 10512
+          

@@ -64,6 +64,16 @@ var cy = cytoscape({
 
 });
 
+function scrollToSidebar() {
+  document!.getElementById('sidebar')!.scrollIntoView({ behavior: 'smooth' });
+}
+function scrollToGraph() {
+  document!.getElementById('cy')!.scrollIntoView({ behavior: 'smooth' });
+}
+
+document.getElementById('scroll-down')?.addEventListener('click', scrollToSidebar);
+document.getElementById('scroll-up')?.addEventListener('click', scrollToGraph);
+
 function update_sidebar(title: string, image?: string, video?: string) {
   document.getElementById('action-name')!.innerHTML = title;
   var image_elm = document.getElementById('action-img') as HTMLImageElement
@@ -85,7 +95,7 @@ function update_sidebar(title: string, image?: string, video?: string) {
   }
 
   if (video || image) {
-    document!.getElementById('sidebar')!.scrollIntoView({ behavior: 'smooth' });
+    scrollToSidebar();
   }
 }
 

@@ -108,3 +108,66 @@ cy.on('tap', 'edge', function (evt) {
   var edge = evt.target.data();
   update_sidebar(edge.name, undefined, edge.video);
 });
+
+function addStep(edge: any) {
+  var newElm = document.createElement('li');
+  newElm.setAttribute('action-id', edge.id);
+
+  var link = document.createElement('a');
+  link.innerHTML = edge.name;
+  link.addEventListener('click', function () {
+    update_sidebar(edge.name, undefined, edge.video);
+  });
+  newElm.appendChild(link);
+
+  var removeButton = document.createElement('button');
+  removeButton.innerHTML = 'x';
+  removeButton.addEventListener('click', function () {
+    newElm.remove();
+  });
+  newElm.appendChild(removeButton);
+
+  document.getElementById('steps')?.appendChild(newElm);
+}
+
+document.getElementById('add-step')?.addEventListener('click', function () {
+  var edge = cy.edges(":selected").first().data();
+  addStep(edge);
+});
+
+document.getElementById('share-link')?.addEventListener('click', function () {
+  let txt = "";
+  let ch = document.getElementById('steps')?.children!;
+  for (let i = 0; i < ch.length; i++) {
+    let chi = ch[i];
+    txt += chi.getAttribute('action-id');
+    if (i < ch.length - 1) {
+      txt += ":";
+    }
+  }
+  let url = window.location.href.split('?')[0] + "?seq=" + txt;
+  let txtfield = document.getElementById('share-url') as HTMLInputElement;
+  txtfield.setAttribute('value', url);
+
+  txtfield.select();
+  txtfield.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+
+});
+
+cy.on('ready', function (evt) {
+  let url = location.search;
+  let query = url.substr(1);
+  let result = {};
+  query.split("&").forEach(function(part) {
+    let item = part.split("=");
+    let key = item[0];
+    let value = decodeURIComponent(item[1]);
+    if (key == 'seq') {
+      value.split(":").forEach(function(part) {
+        let edge = cy.edges('[id="' + part + '"]').first().data();
+        addStep(edge);
+      });
+    }
+  });
+});

@@ -109,6 +109,39 @@ cy.on('tap', 'edge', function (evt) {
   update_sidebar(edge.name, undefined, edge.video);
 });
 
+//
+// Graph Editing
+//
+
+document.getElementById('add-node')?.addEventListener('click', function () {
+  cy.add({
+    group: 'nodes',
+    data: { id: 'ptest', name: "Test Node" }
+  });
+});
+
+document.getElementById('add-edge')?.addEventListener('click', function () {
+  const selected = cy.nodes(":selected");
+  if (selected.length != 2) {
+    alert("Have to select two nodes to connect by edge");
+    return;
+  }
+  var node1 = selected[0].data();
+  var node2 = selected[1].data();
+  cy.add({
+    group: 'edges',
+    data: { id: 'atest', name: "Test edge", source: node1.id, target: node2.id }
+  });
+});
+
+document.getElementById('save')?.addEventListener('click', function () {
+  console.log(cy.json());
+});
+
+//
+// Sequence
+//
+
 function addStep(edge: any) {
   var newElm = document.createElement('li');
   newElm.setAttribute('action-id', edge.id);
@@ -155,6 +188,7 @@ document.getElementById('share-link')?.addEventListener('click', function () {
 
 });
 
+// Load sequence from url
 cy.on('ready', function (evt) {
   let url = location.search;
   let query = url.substr(1);
